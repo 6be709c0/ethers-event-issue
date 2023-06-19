@@ -28,6 +28,9 @@ describe("Example test", function () {
       for (const event of contractReceipt.logs!) {
         console.log(event.fragment.name, event.args[0].toString());
       }
+
+      // Works
+      //   contractA.emit("TokensMinted", 123);
     });
   });
 });
