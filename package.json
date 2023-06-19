@@ -1,0 +1,26 @@
+{
+  "name": "ethers-event-issue",
+  "version": "1.0.0",
+  "description": "Simple project to show an issue with ethersjs not firing the \"on\" event listener when an event is raised from a smart contract",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamdry/ethers-event-issue.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adamdry/ethers-event-issue/issues"
+  },
+  "homepage": "https://github.com/adamdry/ethers-event-issue#readme",
+  "devDependencies": {
+    "hardhat": "^2.15.0",
+    "solc": "^0.8.20",
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "hardhat-deploy": "^0.11.31"
+  }
+}
