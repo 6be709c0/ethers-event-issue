@@ -2,3 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export { ContractA__factory } from "./ContractA__factory";
+export { Lock__factory } from "./Lock__factory";

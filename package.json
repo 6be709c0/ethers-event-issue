@@ -18,9 +18,14 @@
   },
   "homepage": "https://github.com/adamdry/ethers-event-issue#readme",
   "devDependencies": {
-    "hardhat": "^2.15.0",
-    "solc": "^0.8.20",
     "@nomicfoundation/hardhat-toolbox": "^3.0.0",
-    "hardhat-deploy": "^0.11.31"
+    "hardhat": "^2.15.0",
+    "hardhat-deploy": "^0.11.31",
+    "solc": "^0.8.20"
+  },
+  "dependencies": {
+    "@nomicfoundation/hardhat-ethers": "^3.0.2",
+    "ethers": "^6.6.0",
+    "web3": "^4.0.1"
   }
 }

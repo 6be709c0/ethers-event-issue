@@ -1,0 +1,67 @@
+{
+  "address": "0xea211E3013B4b0A839F975dDCcf7BbfC57c07673",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "TokensMinted",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "mint",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0xfdc5417244233917a1c0e0611103baeb08789e648fde6b04858e380efa727b22",
+  "receipt": {
+    "to": null,
+    "from": "0x316132427CDbc959970D966239424B6A9C9E28ba",
+    "contractAddress": "0xea211E3013B4b0A839F975dDCcf7BbfC57c07673",
+    "transactionIndex": 0,
+    "gasUsed": "125281",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x54606ca37df2f3f171189bcdb9a8bb77a8029cb56e5109667de8a09b1e339329",
+    "transactionHash": "0xfdc5417244233917a1c0e0611103baeb08789e648fde6b04858e380efa727b22",
+    "logs": [],
+    "blockNumber": 1,
+    "cumulativeGasUsed": "125281",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "a8c2f097feb1113e654aa7ad73e5650e",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.18+commit.87f61d96\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"TokensMinted\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"mint\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/ContractA.sol\":\"ContractA\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/ContractA.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity >=0.8.18;\\n\\ncontract ContractA {\\n    event TokensMinted(uint amount);\\n\\n    function mint(uint amount) public {\\n        emit TokensMinted(amount);\\n    }\\n}\\n\",\"keccak256\":\"0x1ae102c039ee11be76719fff930a6a957f92d8d1f1814dd56a6c293833d9f1ae\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5061014e806100206000396000f3fe608060405234801561001057600080fd5b506004361061002b5760003560e01c8063a0712d6814610030575b600080fd5b61004a600480360381019061004591906100c1565b61004c565b005b7f772f66a00a405709c30e7f18feadcc8f123b20c09c7260165d3eec36c9f213728160405161007b91906100fd565b60405180910390a150565b600080fd5b6000819050919050565b61009e8161008b565b81146100a957600080fd5b50565b6000813590506100bb81610095565b92915050565b6000602082840312156100d7576100d6610086565b5b60006100e5848285016100ac565b91505092915050565b6100f78161008b565b82525050565b600060208201905061011260008301846100ee565b9291505056fea26469706673582212207adaf636f3c9b74456d8dbc77318af4c4605674f147c10f94c3ca71047d3cb1964736f6c63430008120033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061002b5760003560e01c8063a0712d6814610030575b600080fd5b61004a600480360381019061004591906100c1565b61004c565b005b7f772f66a00a405709c30e7f18feadcc8f123b20c09c7260165d3eec36c9f213728160405161007b91906100fd565b60405180910390a150565b600080fd5b6000819050919050565b61009e8161008b565b81146100a957600080fd5b50565b6000813590506100bb81610095565b92915050565b6000602082840312156100d7576100d6610086565b5b60006100e5848285016100ac565b91505092915050565b6100f78161008b565b82525050565b600060208201905061011260008301846100ee565b9291505056fea26469706673582212207adaf636f3c9b74456d8dbc77318af4c4605674f147c10f94c3ca71047d3cb1964736f6c63430008120033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [],
+    "types": null
+  }
+}

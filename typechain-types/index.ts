@@ -2,5 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { ContractA } from "./ContractA";
+export type { Lock } from "./Lock";
 export * as factories from "./factories";
 export { ContractA__factory } from "./factories/ContractA__factory";
+export { Lock__factory } from "./factories/Lock__factory";
