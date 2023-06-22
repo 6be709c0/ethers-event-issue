@@ -3,12 +3,10 @@
 /* eslint-disable */
 import type {
   BaseContract,
-  BigNumberish,
   BytesLike,
   FunctionFragment,
   Result,
   Interface,
-  EventFragment,
   ContractRunner,
   ContractMethod,
   Listener,
@@ -17,31 +15,19 @@ import type {
   TypedContractEvent,
   TypedDeferredTopicFilter,
   TypedEventLog,
-  TypedLogDescription,
   TypedListener,
   TypedContractMethod,
 } from "./common";
 
 export interface ContractAInterface extends Interface {
-  getFunction(nameOrSignature: "mint"): FunctionFragment;
+  getFunction(nameOrSignature: "helloWorld"): FunctionFragment;
 
-  getEvent(nameOrSignatureOrTopic: "TokensMinted"): EventFragment;
+  encodeFunctionData(
+    functionFragment: "helloWorld",
+    values?: undefined
+  ): string;
 
-  encodeFunctionData(functionFragment: "mint", values: [BigNumberish]): string;
-
-  decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
-}
-
-export namespace TokensMintedEvent {
-  export type InputTuple = [amount: BigNumberish];
-  export type OutputTuple = [amount: bigint];
-  export interface OutputObject {
-    amount: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
+  decodeFunctionResult(functionFragment: "helloWorld", data: BytesLike): Result;
 }
 
 export interface ContractA extends BaseContract {
@@ -87,34 +73,15 @@ export interface ContractA extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
-  mint: TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
+  helloWorld: TypedContractMethod<[], [void], "nonpayable">;
 
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
   ): T;
 
   getFunction(
-    nameOrSignature: "mint"
-  ): TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
+    nameOrSignature: "helloWorld"
+  ): TypedContractMethod<[], [void], "nonpayable">;
 
-  getEvent(
-    key: "TokensMinted"
-  ): TypedContractEvent<
-    TokensMintedEvent.InputTuple,
-    TokensMintedEvent.OutputTuple,
-    TokensMintedEvent.OutputObject
-  >;
-
-  filters: {
-    "TokensMinted(uint256)": TypedContractEvent<
-      TokensMintedEvent.InputTuple,
-      TokensMintedEvent.OutputTuple,
-      TokensMintedEvent.OutputObject
-    >;
-    TokensMinted: TypedContractEvent<
-      TokensMintedEvent.InputTuple,
-      TokensMintedEvent.OutputTuple,
-      TokensMintedEvent.OutputObject
-    >;
-  };
+  filters: {};
 }

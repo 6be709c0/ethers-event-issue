@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.18;
 
-contract ContractA {
-    event TokensMinted(uint amount);
+error ContractA__AnyError();
 
-    function mint(uint amount) public {
-        emit TokensMinted(amount);
+contract ContractA {
+    function helloWorld() public {
+       revert ContractA__AnyError();
     }
 }

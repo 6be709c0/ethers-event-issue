@@ -1,9 +1,5 @@
-import * as chai from "chai";
-import { BigNumber, ContractReceipt, ContractTransaction } from "ethers";
+import { expect, assert } from "chai";
 import { ethers } from "hardhat";
-import { ContractA, ContractAFactory } from "../typechain";
-
-const expect = chai.expect;
 
 describe("Example test", function () {
   it("should fire the event", async function () {
@@ -15,22 +11,22 @@ describe("Example test", function () {
     );
 
     const contractA = await contractAFactory.deploy();
-    await new Promise(async (resolve) => {
-      contractA.on("TokensMinted", (amount: BigNumber) => {
-        // THIS LINE NEVER GETS HIT
-        console.log("###########");
-        resolve(true);
-      });
+    // await contractA.helloWorld(); // reverted with custom error 'ContractA__AnyError()'
+    await expect(contractA.helloWorld()).to.be.reverted; // Work
 
-      const contractTx: ContractTransaction = await contractA.mint(123);
-      const contractReceipt: ContractReceipt = await contractTx.wait();
+    // ERROR
+    await expect(contractA.helloWorld()).to.be.revertedWith("ContractA__AnyError"); // Not working
+    await expect(contractA.helloWorld()).to.be.revertedWith("ContractA__AnyError()"); // Not working
 
-      for (const event of contractReceipt.logs!) {
-        console.log(event.fragment.name, event.args[0].toString());
-      }
+    // Expected transaction to be reverted with reason 'ContractA__AnyError()', but it reverted with a custom error
 
-      // Works
-      //   contractA.emit("TokensMinted", 123);
-    });
+    // Temporary solution
+    let errorMessage;
+    try {
+      await contractA.helloWorld();
+    } catch (e: any) {
+      errorMessage = contractA.interface.parseError(e.data)?.name;
+    }
+    assert.equal(errorMessage, "ContractA__AnyError"); // Work
   });
 });
