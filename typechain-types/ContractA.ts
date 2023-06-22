@@ -20,14 +20,22 @@ import type {
 } from "./common";
 
 export interface ContractAInterface extends Interface {
-  getFunction(nameOrSignature: "helloWorld"): FunctionFragment;
+  getFunction(nameOrSignature: "helloWorld" | "helloWorld2"): FunctionFragment;
 
   encodeFunctionData(
     functionFragment: "helloWorld",
     values?: undefined
   ): string;
+  encodeFunctionData(
+    functionFragment: "helloWorld2",
+    values?: undefined
+  ): string;
 
   decodeFunctionResult(functionFragment: "helloWorld", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "helloWorld2",
+    data: BytesLike
+  ): Result;
 }
 
 export interface ContractA extends BaseContract {
@@ -75,12 +83,17 @@ export interface ContractA extends BaseContract {
 
   helloWorld: TypedContractMethod<[], [void], "nonpayable">;
 
+  helloWorld2: TypedContractMethod<[], [void], "nonpayable">;
+
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
   ): T;
 
   getFunction(
     nameOrSignature: "helloWorld"
+  ): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "helloWorld2"
   ): TypedContractMethod<[], [void], "nonpayable">;
 
   filters: {};
