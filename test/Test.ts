@@ -16,21 +16,34 @@ describe("Example test", function () {
 
     const contractA = await contractAFactory.deploy();
     await new Promise(async (resolve) => {
-      contractA.once("TokensMinted", (amount: BigNumber) => {
-        // THIS LINE NEVER GETS HIT
-        console.log("###########");
-        resolve(true);
+      contractA.on("EventNumber", (amount: BigNumber) => {
+        console.log(`- Received events testWithNumber with amount: ${amount}`);
+      });
+      contractA.on("EventAddress", (address) => {
+        console.log(
+          `- Received events testWithEventAddress with value: ${address}`
+        );
+      });
+      contractA.on("EventAddressIndexed", (address) => {
+        console.log(
+          `- Received events testWithEventAddressIndexed with value: ${address}`
+        );
       });
 
-      const contractTx: ContractTransaction = await contractA.mint(123);
-      const contractReceipt: ContractReceipt = await contractTx.wait();
-
-      for (const event of contractReceipt.logs!) {
-        console.log(event.fragment.name, event.args[0].toString());
-      }
-
-      // Works
-        // contractA.emit("TokensMinted", 123);
+      console.log("\n## Triggering test event with a number...");
+      await contractA.testWithNumber(123);
+      await wait(1000);
+      console.log("\n## Triggering test event with an address...");
+      await contractA.testWithEventAddress();
+      await wait(1000);
+      console.log("\n## Triggering test event with an address indexed...");
+      await contractA.testWithEventAddressIndexed();
+      await wait(1000);
+      console.log("\n## Triggering test with 2 events...");
+      await contractA.testWithMultipleEvents();
+      await wait(1000);
     });
   });
 });
+
+const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

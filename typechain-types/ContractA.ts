@@ -9,6 +9,7 @@ import type {
   Result,
   Interface,
   EventFragment,
+  AddressLike,
   ContractRunner,
   ContractMethod,
   Listener,
@@ -23,16 +24,81 @@ import type {
 } from "./common";
 
 export interface ContractAInterface extends Interface {
-  getFunction(nameOrSignature: "mint"): FunctionFragment;
+  getFunction(
+    nameOrSignature:
+      | "testWithEventAddress"
+      | "testWithEventAddressIndexed"
+      | "testWithMultipleEvents"
+      | "testWithNumber"
+  ): FunctionFragment;
 
-  getEvent(nameOrSignatureOrTopic: "TokensMinted"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic:
+      | "EventAddress"
+      | "EventAddressIndexed"
+      | "EventNumber"
+  ): EventFragment;
 
-  encodeFunctionData(functionFragment: "mint", values: [BigNumberish]): string;
+  encodeFunctionData(
+    functionFragment: "testWithEventAddress",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "testWithEventAddressIndexed",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "testWithMultipleEvents",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "testWithNumber",
+    values: [BigNumberish]
+  ): string;
 
-  decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "testWithEventAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "testWithEventAddressIndexed",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "testWithMultipleEvents",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "testWithNumber",
+    data: BytesLike
+  ): Result;
 }
 
-export namespace TokensMintedEvent {
+export namespace EventAddressEvent {
+  export type InputTuple = [player: AddressLike];
+  export type OutputTuple = [player: string];
+  export interface OutputObject {
+    player: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace EventAddressIndexedEvent {
+  export type InputTuple = [player: AddressLike];
+  export type OutputTuple = [player: string];
+  export interface OutputObject {
+    player: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace EventNumberEvent {
   export type InputTuple = [amount: BigNumberish];
   export type OutputTuple = [amount: bigint];
   export interface OutputObject {
@@ -87,34 +153,89 @@ export interface ContractA extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
-  mint: TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
+  testWithEventAddress: TypedContractMethod<[], [void], "nonpayable">;
+
+  testWithEventAddressIndexed: TypedContractMethod<[], [void], "nonpayable">;
+
+  testWithMultipleEvents: TypedContractMethod<[], [void], "nonpayable">;
+
+  testWithNumber: TypedContractMethod<
+    [amount: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
 
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
   ): T;
 
   getFunction(
-    nameOrSignature: "mint"
+    nameOrSignature: "testWithEventAddress"
+  ): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "testWithEventAddressIndexed"
+  ): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "testWithMultipleEvents"
+  ): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "testWithNumber"
   ): TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
 
   getEvent(
-    key: "TokensMinted"
+    key: "EventAddress"
   ): TypedContractEvent<
-    TokensMintedEvent.InputTuple,
-    TokensMintedEvent.OutputTuple,
-    TokensMintedEvent.OutputObject
+    EventAddressEvent.InputTuple,
+    EventAddressEvent.OutputTuple,
+    EventAddressEvent.OutputObject
+  >;
+  getEvent(
+    key: "EventAddressIndexed"
+  ): TypedContractEvent<
+    EventAddressIndexedEvent.InputTuple,
+    EventAddressIndexedEvent.OutputTuple,
+    EventAddressIndexedEvent.OutputObject
+  >;
+  getEvent(
+    key: "EventNumber"
+  ): TypedContractEvent<
+    EventNumberEvent.InputTuple,
+    EventNumberEvent.OutputTuple,
+    EventNumberEvent.OutputObject
   >;
 
   filters: {
-    "TokensMinted(uint256)": TypedContractEvent<
-      TokensMintedEvent.InputTuple,
-      TokensMintedEvent.OutputTuple,
-      TokensMintedEvent.OutputObject
+    "EventAddress(address)": TypedContractEvent<
+      EventAddressEvent.InputTuple,
+      EventAddressEvent.OutputTuple,
+      EventAddressEvent.OutputObject
     >;
-    TokensMinted: TypedContractEvent<
-      TokensMintedEvent.InputTuple,
-      TokensMintedEvent.OutputTuple,
-      TokensMintedEvent.OutputObject
+    EventAddress: TypedContractEvent<
+      EventAddressEvent.InputTuple,
+      EventAddressEvent.OutputTuple,
+      EventAddressEvent.OutputObject
+    >;
+
+    "EventAddressIndexed(address)": TypedContractEvent<
+      EventAddressIndexedEvent.InputTuple,
+      EventAddressIndexedEvent.OutputTuple,
+      EventAddressIndexedEvent.OutputObject
+    >;
+    EventAddressIndexed: TypedContractEvent<
+      EventAddressIndexedEvent.InputTuple,
+      EventAddressIndexedEvent.OutputTuple,
+      EventAddressIndexedEvent.OutputObject
+    >;
+
+    "EventNumber(uint256)": TypedContractEvent<
+      EventNumberEvent.InputTuple,
+      EventNumberEvent.OutputTuple,
+      EventNumberEvent.OutputObject
+    >;
+    EventNumber: TypedContractEvent<
+      EventNumberEvent.InputTuple,
+      EventNumberEvent.OutputTuple,
+      EventNumberEvent.OutputObject
     >;
   };
 }
