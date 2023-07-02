@@ -16,7 +16,7 @@ describe("Example test", function () {
 
     const contractA = await contractAFactory.deploy();
     await new Promise(async (resolve) => {
-      contractA.on("TokensMinted", (amount: BigNumber) => {
+      contractA.once("TokensMinted", (amount: BigNumber) => {
         // THIS LINE NEVER GETS HIT
         console.log("###########");
         resolve(true);
@@ -30,7 +30,7 @@ describe("Example test", function () {
       }
 
       // Works
-      //   contractA.emit("TokensMinted", 123);
+        // contractA.emit("TokensMinted", 123);
     });
   });
 });
